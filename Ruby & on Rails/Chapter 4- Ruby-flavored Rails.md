@@ -1,4 +1,4 @@
-#Chapter 4: Ruby-flavored Rails
+# Chapter 4: Ruby-flavored Rails
 
 Custom helpers are basically creating functions that return html and can be embedded in html.erb files, module code under app/helpers:
 

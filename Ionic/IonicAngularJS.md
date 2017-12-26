@@ -26,7 +26,7 @@ cd into your project:
 Note: iOS development requires OS X currently
    See the Android Platform Guide for full Android installation instructions: [here](https://cordova.apache.org/docs/en/edge/guide_platforms_android_index.md.html)
 
-###Other Ionic Commands
+### Other Ionic Commands
 
 *  Build your app: ``ionic build <PLATFORM>``
 *  Simulate your app: ``ionic emulate <PLATFORM>``
@@ -36,7 +36,7 @@ Note: iOS development requires OS X currently
 For more help use ionic --help or ionic docs
 Visit the Ionic docs: [here](http://ionicframework.com/docs)
  
-##Understanding the Ionic Installation
+## Understanding the Ionic Installation
 * hooks folder - cordova commands, to extend
 * plugins - ionic extensions, installations will go here si si lo haces use “git install"
 * www files -
@@ -60,23 +60,24 @@ Visit the Ionic docs: [here](http://ionicframework.com/docs)
 * <ion nav-view></ion nav-view> where all las views van
 
  
-##Working with the Ionic CLI and templates
+## Working with the Ionic CLI and templates
 “Scaffold and application” Run it in different ways
 
 [Terminal]
 
-<code> 
+```
 cd ~/Desktop
 ionic start defaultApp tabs     
-// creates “defaultApp” project with the tabs templatess
+// creates “defaultApp” project with the tabs templates
 // tabs based on defaultApp project 
 cd defaultApp 
+
 ionic serve preview
-restart client app from the root
+// restart client app from the root
 restart or r
-to enable/disable console log output
+// to enable/disable console log output
 consolelogs or c 
-</code>
+```
  
 start from scratch - use blank template
 
