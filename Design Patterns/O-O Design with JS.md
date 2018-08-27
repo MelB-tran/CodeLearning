@@ -28,3 +28,29 @@ Bird.prototype = {
 ```
 
 With inheritance, an object must be initialized/set a specific way in order for inheritance to take effect
+
+```
+function Animal() { }
+
+Animal.prototype = {
+  constructor: Animal, 
+  eat: function() {
+    console.log("nom nom nom");
+  }
+};
+
+// Add your code below this line
+
+let duck = Object.create(Animal.prototype);
+```
+
+Unlike the case with c#, it seems to be that inheritance is explicitly declared on object initialization: 
+```
+(same as above lines 33 - 40)
+
+function Dog() { }
+Dog.prototype =  Object.create(Animal.prototype);
+
+let beagle = new Dog();
+beagle.eat();  // Should print "nom nom nom"
+``` 
