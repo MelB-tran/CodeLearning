@@ -44,7 +44,7 @@ Animal.prototype = {
 let duck = Object.create(Animal.prototype);
 ```
 
-Unlike the case with c#, it seems to be that inheritance is explicitly declared on object initialization: 
+Unlike the case with c#, it seems that inheritance is explicitly declared on child object initialization: 
 ```
 (same as above lines 33 - 40)
 
