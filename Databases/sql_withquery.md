@@ -1,4 +1,4 @@
-Learning how to write WITH queries, which is basically having several seemingly unrelated subqueries and then joining them together,
+Learning how to write WITH queries, which is basically having several seemingly unrelated subqueries and then joining them together in a final select,
 as if they were tables/views
 ```
 WITH ExtHealthProfileMapped(person_id
