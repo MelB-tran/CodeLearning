@@ -16,3 +16,6 @@ You need two files, one with the main code, and another for the worker/bg thread
 - You can run any type code with some exceptions, including manipulating the DOM or default methods and properties in the ``window`` object. For available methods, see [here](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Functions_and_classes_available_to_workers)
 - There are different types of workesr: Dedicated, Shared, Audio, Chrome 
 - Shared workers can be used by *multiple* scripts in multiple places like windows, Iframes, etc as long as they're in the same domain as the worker. They also use an active port for communication
+- If a worker needs to be immediately terminated from the main thread, the ``terminate`` method can be called
+``` myWorker.terminate(); ```
+- Within the worker thread, workers can close themselves by their own close method ``close();``
