@@ -1,5 +1,6 @@
 ## FreeCodeCamp Object-Oriented design with javascript
 Notes from the O-O module. Some things I have skipped through as I have un grasp de los conceptos already :)
+Further material from [this dev article]()  
 
 Use of prototype to share properties around multiple objects
 Constructors of an object can be used to check what type of object it is
@@ -27,7 +28,8 @@ Bird.prototype = {
 };
 ```
 
-With inheritance, it must be explicitly declared on child object initialization for inheritance to take effect
+With inheritance, it must be explicitly declared on child object initialization for inheritance to take effect  
+``Object.create`` allows you to create an object which will delegate to another object on failed lookups (it can consult another object to check if it has that property)
 
 ```
 function Animal() { }
