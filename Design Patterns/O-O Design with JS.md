@@ -29,8 +29,8 @@ Bird.prototype = {
 ```
 
 With inheritance, it must be explicitly declared on child object initialization for inheritance to take effect  
-``Object.create`` allows you to create an object which will delegate to another object on failed lookups (it can consult another object to check if it has that property)
-
+``Object.create`` allows you to create an object which will delegate to another object on failed lookups (it can consult another object to check if it has that property),
+in this case the parent objects
 ```
 function Animal() { }
 
@@ -57,3 +57,5 @@ Dog.prototype =  Object.create(Animal.prototype);
 let beagle = new Dog();
 beagle.eat();  // Should print "nom nom nom"
 ``` 
+
+You can use the ``new`` keyword to accomplish pretty much the same as setting functions in ``prototype`` and using ``Object.create``
