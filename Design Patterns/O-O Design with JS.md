@@ -58,4 +58,4 @@ let beagle = new Dog();
 beagle.eat();  // Should print "nom nom nom"
 ``` 
 
-You can use the ``new`` keyword to accomplish pretty much the same as setting functions in ``prototype`` and using ``Object.create``
+You can use the ``new`` keyword to accomplish pretty much the same as setting functions in ``prototype``, and using ``Object.create``. As well as being able to use the ``this`` keyword and 
