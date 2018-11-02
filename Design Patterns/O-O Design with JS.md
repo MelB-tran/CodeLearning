@@ -58,4 +58,106 @@ let beagle = new Dog();
 beagle.eat();  // Should print "nom nom nom"
 ``` 
 
-You can use the ``new`` keyword to accomplish pretty much the same as setting functions in ``prototype``, and using ``Object.create``. As well as being able to use the ``this`` keyword and 
+You can use the ``new`` keyword to replace ``Object.create``, and the object itself being returned with ``this`` keyword 
+```
+class Animal {
+  constructor(name, energy) {
+    this.name = name
+    this.energy = energy
+  }
+  eat(amount) {
+    console.log(`${this.name} is eating.`)
+    this.energy += amount
+  }
+  sleep(length) {
+    console.log(`${this.name} is sleeping.`)
+    this.energy += length
+  }
+  play(length) {
+    console.log(`${this.name} is playing.`)
+    this.energy -= length
+  }
+}
+
+const leo = new Animal('Leo', 7)
+const snoop = new Animal('Snoop', 10)
+
+```
+
+Another good example is Array and how you're p. much creating an instantiation of the Array class when using ``[]``
+
+### Static functions
+Static functions can be used as a method specific to that class, but that doesn't have to be shared across instances ! In the following example ``nextToEat(animals){...}`` functions like that
+```
+class Animal {
+  constructor(name, energy) {
+    this.name = name
+    this.energy = energy
+  }
+  eat(amount) {
+    console.log(`${this.name} is eating.`)
+    this.energy += amount
+  }
+  sleep(length) {
+    console.log(`${this.name} is sleeping.`)
+    this.energy += length
+  }
+  play(length) {
+    console.log(`${this.name} is playing.`)
+    this.energy -= length
+  }
+  static nextToEat(animals) {
+    const sortedByLeastEnergy = animals.sort((a,b) => {
+      return a.energy - b.energy
+    })
+
+    return sortedByLeastEnergy[0].name
+  }
+}
+```
+the function does *not* live under the prototype, so it must be called as ``Animal.nextToEat``
+With ES5, it's the same as above, but while the non-static functions are added to ``prototype``, the static function is added directly to ``Animal`` object
+
+```
+Animal.nextToEat = function (nextToEat) {
+  const sortedByLeastEnergy = animals.sort((a,b) => {
+    return a.energy - b.energy
+  })
+
+  return sortedByLeastEnergy[0].name
+}
+```
+You can easily get an object's prototype sin importar how it was created. The ``prototype`` object will have a ``constructor`` property on the prototype by defalt, with any instances able to access their constructor via ``instance.constructor``.
+```function Animal (name, energy) {
+  this.name = name
+  this.energy = energy
+}
+
+Animal.prototype.eat = function (amount) {
+  console.log(`${this.name} is eating.`)
+  this.energy += amount
+}
+
+Animal.prototype.sleep = function (length) {
+  console.log(`${this.name} is sleeping.`)
+  this.energy += length
+}
+
+Animal.prototype.play = function (length) {
+  console.log(`${this.name} is playing.`)
+  this.energy -= length
+}
+
+const leo = new Animal('Leo', 7)
+const prototype = Object.getPrototypeOf(leo)
+
+console.log(prototype)
+// {constructor: ƒ, eat: ƒ, sleep: ƒ, play: ƒ}
+
+prototype === Animal.prototype // true
+```
+
+Another take away from above es que el code on line 157: ``prototype === Animal.prototype // true`` demonstrates that ``.getPrototypeOf`` returns the prototype which was indeed created from the ``Animal`` object
+AND in this case, a separate  prototype for the "leo" object has not been created
+
+## Determine if a property lives on the prototype
