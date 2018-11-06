@@ -153,7 +153,7 @@ const leo = new Animal('Leo', 7)
 const prototype = Object.getPrototypeOf(leo)
 
 console.log(prototype)
-// {constructor: Æ’, eat: Æ’, sleep: Æ’, play: Æ’}
+// {constructor: ƒ, eat: ƒ, sleep: ƒ, play: ƒ}
 
 prototype === Animal.prototype // true
 ```
@@ -217,8 +217,17 @@ With 2) it creates an object that delegates the arument object on failed lookups
 ```
 Object.create = function(objToDelegateTo){
   function Fn(){}                 // create empty function, comes with a prototype property
-  Fn.prototype = objToDelegateTo  // set prototype of that empty function equal to the argument object
-  return new Fn()                 // create new object, by invoking the empty function using new & return
+  Fn.prototype = objToDelegateTo  // override prototype of that empty function to the argument object
+  return new Fn()                 // return new object, by invoking the empty function using new & return
 }
+```
+
+### Final Notes
+
+Arrow functions do not have a ``this`` keyword, which result in no constructor functions and will throw an error on ``new``. Arrow functions also do not have a prototype object!
+```
+const Animal = () => {}
+
+const leo = new Animal() // Error: Animal is not a constructor
 
 ```
