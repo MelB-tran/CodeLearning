@@ -12,7 +12,7 @@ console.log(duck.constructor === Bird); //prints true
 console.log(beagle.constructor === Dog); //prints true
 ```
 
-Manually setting a prototype will erase the constructor property so it has to be manually set 
+Manually setting a prototype will erase the constructor property so it has to be manually set
 
 ```
 Bird.prototype = {
@@ -27,13 +27,13 @@ Bird.prototype = {
 };
 ```
 
-With inheritance, an object must be initialized/set a specific way in order for inheritance to take effect
+With inheritance, an object must be initialized by getting clone from parent class' prototype (line 44)
 
 ```
 function Animal() { }
 
 Animal.prototype = {
-  constructor: Animal, 
+  constructor: Animal,
   eat: function() {
     console.log("nom nom nom");
   }
@@ -44,13 +44,22 @@ Animal.prototype = {
 let duck = Object.create(Animal.prototype);
 ```
 
-Unlike the case with c#, it seems that inheritance is explicitly declared on child object initialization: 
+The constructor of parent class will automatically be set for children objects, so it has to be updated manually... (line 54).
+methods can be added after inheritance too (line 56), where  beagle is another function 
+
 ```
 (same as above lines 33 - 40)
 
 function Dog() { }
 Dog.prototype =  Object.create(Animal.prototype);
-
+Dog.prototype.constructor = Dog;
+Dog.prototype.bark = function () {
+  console.log('Woof!');
+}
 let beagle = new Dog();
 beagle.eat();  // Should print "nom nom nom"
-``` 
+```
+
+
+```
+```
