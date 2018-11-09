@@ -82,10 +82,9 @@ start from scratch - use blank template
 any [github repo](https://github.com/driftyco/ionic-cli) to check other templates
  
  
-additional Ionic Code samples, [aqui](http://ionicframework.com/examples) Codepen Demos 😀
-To create an app from this 
-copy URL y luego en la terminal: 
-ionic start flickrApp (copied URL)
+additional Ionic Code samples, [aqui](http://ionicframework.com/examples) Codepen Demos 😀  
+To create an app from this copy URL y luego en la terminal:  
+``ionic start flickrApp (copied URL)``
 
  
 ionic serve has many options tambien para ver detalles `` ionic serve -l (ele)``
