@@ -88,13 +88,9 @@ copy URL y luego en la terminal:
 ionic start flickrApp (copied URL)
 
  
-ionic serve has many options tambien para ver detalles
-
-`` ionic serve -l (ele)``
-
+ionic serve has many options tambien para ver detalles `` ionic serve -l (ele)``
 shows you como se veria en diferentes platforms 😃
 
-[Understanding basic Ionic CSS components]
-(http://ionicframework.com/docs/components/)
+[Understanding basic Ionic CSS components](http://ionicframework.com/docs/components/)  
 
  
