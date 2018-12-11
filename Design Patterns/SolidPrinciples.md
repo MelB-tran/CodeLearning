@@ -11,11 +11,16 @@ Ev program/app should strive for high cohesion and lo coupling, where
 
 
 ### Problem analysis
-walk through a program that uses classes that depend on other parent classes, where the classes using them do not necessarily use, so any changes have a higher likelihood of introducing issues to the whole program. 
+walk through a program that uses classes that depend on other parent classes, where the classes using them do not necessarily use, so any changes have a higher likelihood of introducing issues to the whole program.  
 **Solution** multiple small interfaces that abstract out the functionality and also only have one responsibility. So the main programs use them as needed (stitch together), without any depending on the other. In this case, the "Online Order" class using diff itnerfaces that are relevant to the online ordering process
 
-## Summary
-
+### Summary
+- Following Single Responsibility Principle leads to lower coupling (each program module relying on other modules) and higher cohesion (strongly-related and focused responsibilities of a module)  
+- Many small classes with distinct responsibilities => more flexibility
+**Related Fundamentals (a continuación)**
+- Open/Closed Principle
+- Interface Segregation Principle
+- Separation of Concerns
 
 ## The Open/Closed Principle
 *definition* software entities (classes, modules, functions, etc) should be open to --- but closed to  ---
