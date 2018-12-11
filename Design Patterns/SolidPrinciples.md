@@ -8,7 +8,11 @@ Ev program/app should strive for high cohesion and lo coupling, where
 
 ### Responsibilities
 *definition* changes in behavior from client's pov - a reason to change, difference in usage scenarios  
-
+Mapping:  
+Requirements changes => responsibilities  
+More responsibilities => more likelihood of change  
+Multiple responsibilities within a class => ?
+More classes a change affects => more likely change will introduce errors
 
 ### Problem analysis
 walk through a program that uses classes that depend on other parent classes, where the classes using them do not necessarily use, so any changes have a higher likelihood of introducing issues to the whole program.  
@@ -17,16 +21,18 @@ walk through a program that uses classes that depend on other parent classes, wh
 ### Summary
 - Following Single Responsibility Principle leads to lower coupling (each program module relying on other modules) and higher cohesion (strongly-related and focused responsibilities of a module)  
 - Many small classes with distinct responsibilities => more flexibility
-**Related Fundamentals (a continuaciÃ³n)**
+**Related Fundamentals (a continuación)**
 - Open/Closed Principle
 - Interface Segregation Principle
 - Separation of Concerns
 
 ## The Open/Closed Principle
-*definition* software entities (classes, modules, functions, etc) should be open to --- but closed to  ---
+*definition* software entities (classes, modules, functions, etc) should be open for extension but closed to  modification  
+be able to extend with new functionality and classes without modifying the source 
 
 ### Overview
-
+How do you change behavior without changing code exactly? Relying on abstractions. There's no limit to variety of implementations of each abstraction (how? more explanation needed)  
+In .NET this can be accomplished with interfaces and abstract base classes, in procedural programming, some level of OCP can be achieved thru parameters (cómo?)
 
 ### Problem & Analysis
 walk thru a "store checkout" program where an important method - calculating the total to pay - uses hardcoded values to calculate total amount, does all calculations within the same method, and no space to abstract it out
