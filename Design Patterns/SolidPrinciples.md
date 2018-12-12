@@ -40,7 +40,7 @@ any changes to the fees or rates would require going into the source code and ch
 
 ### How to achieve
 on top of being a "cart", this class also does pricing calculations. so you make an interface for this, which only calculates the price  
-``` c#
+```c#
 public interface IPricingCalculator{
     decimal CalculatePrice(OrderItem item);
 }
