@@ -39,14 +39,14 @@ walk thru a "store checkout" program where the `Cart` class has a price calculat
 any changes to the fees or rates would require going into the source code and changing it, re-building/re-compiling, etc.  
 
 ### How to achieve
-on top of being a "cart", this class also does pricing calculations. so you make an interface for this, which only calculates the price
-```c#
+on top of being a "cart", this class also does pricing calculations. so you make an interface for this, which only calculates the price  
+``` c#
 public interface IPricingCalculator{
     decimal CalculatePrice(OrderItem item);
 }
 ```
 and each price rule is a diff class, based on this interface!
-Diff scenarios are set up where a new class is added for each type of pricing, (buy 4 or 5 get 1 free) but the original cart class remains untouched. Method in `Cart` class where you get `total amount`
+Diff scenarios are set up where a new class is added for each type of pricing, (buy 4 or 5 get 1 free) but the original cart class remains untouched. Method in `Cart` class where you get `total amount`  
 ```c#
     public decimal TotalAmount(){
         var total = 0m;
