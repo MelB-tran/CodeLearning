@@ -122,7 +122,13 @@ Tell the object what you want it to do and use its *own internal* state
 - Asegura substitutability is retained between each class and the new base through Unit Testing  
 
 ## The Interface Segregation Principle
-coming soon...
+ISP - clients should not be forced to depend on unused methods  
+**corollary** - prefer small, cohesive interfaces to "fat" interfaces 
+Interface - non-implementable type representing public methods and properties. Public interface of a class
+
+### The Problem
+Walk-through a "Membership Provider", which has a very large interface.  
+LoginControl - only uses "ValidateUser" method in large "MembershipProvider" interface. So creating a custom membership provider based off that interface, the rest of that interface will have to be implemented.
 
 ## The Dependency Inversion Principle, Pt 1 
 coming soon...
