@@ -123,4 +123,4 @@ Tell the object what you want it to do and use its *own internal* state
 - Crea una tercera clase both can derive from  
 - Asegura substitutability is retained between each class and the new base through Unit Testing  
 
-[Part 2 notes of this Course](/CodeLearning/Design Patterns/SolidPrinciples_part2.md)
+[Part 2 notes of this Course](https://github.com/MelB-tran/CodeLearning/Design Patterns/SolidPrinciples_part2.md)
