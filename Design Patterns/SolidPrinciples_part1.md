@@ -1,12 +1,12 @@
 # Solid Principles of Object-Oriented design    
 Course Notes from Plurasight course  
-[S - SRP](#srp)  
+[S - SRP](#srp---single-responsibility-principle)  
 [O - Open/Closed](#the-open-closed-principle)  
-[L - Liskov Substitution](#liskov)  
-I - Interface Segregation  
-D - Dependency Inversion
+[L - Liskov Substitution](#liskov-substitution-principle)  
+[I - Interface Segregation (part 2)](https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_part2.md#the-interface-segregation-principle)
+[D - Dependency Inversion (part 2)](https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_part2.md#the-dependency-inversion-principle-pt-1)
 
-#srp
+
 ## SRP - Single Responsibility Principle 
 is about ev object having a single responsibility, which should be entirely "encapsulated" in the class - meaning it shouldn't have to use other classes to carry out diff responsibilities. Not dependent.
 
@@ -77,7 +77,6 @@ Si sabes por propia experiencia that a particular type of change is likely to re
 if there's more than one change, refactor to achieve OCP  
 no design can be closed to all changes tho
 
-#liskov
 ## Liskov Substitution Principle
 Subtypes (child) must be substitutable for their (parent) base types, proper use of polymorphism. 
 Child classes must not  
@@ -126,4 +125,4 @@ Tell the object what you want it to do and use its *own internal* state
 - Crea una tercera clase both can derive from  
 - Asegura substitutability is retained between each class and the new base through Unit Testing  
 
-[Part 2 notes of this Course](https://github.com/MelB-tran/CodeLearning/Design Patterns/SolidPrinciples_part2.md)
+[Part 2 notes of this Course](https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_part2.md)
