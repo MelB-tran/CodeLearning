@@ -3,7 +3,7 @@ Course Notes from Plurasight course
 [S - SRP](#srp---single-responsibility-principle)  
 [O - Open/Closed](#the-open-closed-principle)  
 [L - Liskov Substitution](#liskov-substitution-principle)  
-[I - Interface Segregation (part 2)](https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_part2.md#the-interface-segregation-principle)
+[I - Interface Segregation (part 2)](https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_part2.md#the-interface-segregation-principle)  
 [D - Dependency Inversion (part 2)](https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_part2.md#the-dependency-inversion-principle-pt-1)
 
 
