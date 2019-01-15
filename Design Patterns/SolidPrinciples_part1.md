@@ -1,9 +1,11 @@
 # Solid Principles of Object-Oriented design    
+Course Notes from Plurasight course -
 S - SRP  
 O - Open/Closed  
 L - Liskov Substitution  
 I - Interface Segregation  
 D - Dependency Inversion
+
 ## SRP - Single Responsibility Principle 
 is about ev object having a single responsibility, which should be entirely "encapsulated" in the class - meaning it shouldn't have to use other classes to carry out diff responsibilities. Not dependent.
 
@@ -121,26 +123,4 @@ Tell the object what you want it to do and use its *own internal* state
 - Crea una tercera clase both can derive from  
 - Asegura substitutability is retained between each class and the new base through Unit Testing  
 
-## The Interface Segregation Principle
-ISP - clients should not be forced to depend on unused methods  
-**corollary** - prefer small, cohesive interfaces to "fat" interfaces 
-Interface - non-implementable type representing public methods and properties. Public interface of a class
-
-### The Problem
-Walk-through a "Membership Provider", which has a very large interface.  
-LoginControl - only uses "ValidateUser" method in large "MembershipProvider" interface. So creating a custom membership provider based off that interface, the rest of that interface will have to be implemented.
-
-## The Dependency Inversion Principle, Pt 1 
-coming soon...
-
-## The Dependency Inversion Principle, Pt 2
-coming soon...
-
-## The Don't Repeat Yourself Principle, Pt 1 
-coming soon...
-
-## The Don't Repeat Yourself Principle, Pt 2 
-coming soon...
-
-## The Don't Repeat Yourself Principle, Pt 3
-coming soon...
+[Part 2 notes of this Course]()
