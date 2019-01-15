@@ -4,8 +4,8 @@ S - SRP
 O - Open/Closed  
 L - Liskov Substitution  
 I - Interface Segregation  
-D - Dependency Inversion
-(See Part 1)[https://github.com/MelB-tran/CodeLearning/Design Patterns/SolidPrinciples_part1.md]
+D - Dependency Inversion  
+[See Part 1](../CodeLearning/Design Patterns/SolidPrinciples_part1.md)
 
 ## The Interface Segregation Principle
 ISP - clients should not be forced to depend on unused methods  
