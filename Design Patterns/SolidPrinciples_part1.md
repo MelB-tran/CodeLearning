@@ -1,12 +1,12 @@
 # Solid Principles of Object-Oriented design    
 Course Notes from Plurasight course  
-[S - SRP](#srp)
+[S - SRP](#srp)  
 [O - Open/Closed](#open-closed)  
 [L - Liskov Substitution](#liskov)  
 I - Interface Segregation  
 D - Dependency Inversion
 
-###srp
+#srp
 ## SRP - Single Responsibility Principle 
 is about ev object having a single responsibility, which should be entirely "encapsulated" in the class - meaning it shouldn't have to use other classes to carry out diff responsibilities. Not dependent.
 
@@ -35,7 +35,7 @@ walk through a program that uses classes that depend on other parent classes, wh
 - Interface Segregation Principle
 - Separation of Concerns
 
-###open-closed
+#open-closed
 ## The Open/Closed Principle
 *definition* software entities (classes, modules, functions, etc) should be open for extension but closed to  modification  
 be able to extend with new functionality and classes without modifying the source 
@@ -77,7 +77,7 @@ Si sabes por propia experiencia that a particular type of change is likely to re
 if there's more than one change, refactor to achieve OCP  
 no design can be closed to all changes tho
 
-###liskov
+#liskov
 ## Liskov Substitution Principle
 Subtypes (child) must be substitutable for their (parent) base types, proper use of polymorphism. 
 Child classes must not  
