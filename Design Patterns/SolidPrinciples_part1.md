@@ -1,7 +1,7 @@
 # Solid Principles of Object-Oriented design    
 Course Notes from Plurasight course  
 [S - SRP](#srp)  
-[O - Open/Closed](#open-closed)  
+[O - Open/Closed](#the-open-closed-principle)  
 [L - Liskov Substitution](#liskov)  
 I - Interface Segregation  
 D - Dependency Inversion
@@ -35,8 +35,8 @@ walk through a program that uses classes that depend on other parent classes, wh
 - Interface Segregation Principle
 - Separation of Concerns
 
-#open-closed
-## The Open/Closed Principle
+
+## The Open-Closed Principle
 *definition* software entities (classes, modules, functions, etc) should be open for extension but closed to  modification  
 be able to extend with new functionality and classes without modifying the source 
 
