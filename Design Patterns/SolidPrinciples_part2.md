@@ -18,7 +18,7 @@ LoginControl - only uses "ValidateUser" method in fat "MembershipProvider" inter
 Example no. 2 - ``AboutPage`` that only needs a ``ApplicationName`` and ``AuthorName`` but instead forced to deal with large ``ConfigurationSettings`` class.
 
 ### Demo 
-Create another folder ````AboutPage`` takes in a configuration file in the constructor for the class instead. If no config file is passed as parameter, it defaults to using a Config settings property from a reference ``Inter
+Create another folder ``AboutPage`` takes in a configuration file in the constructor for the class instead. If no config file is passed as parameter, it defaults to using a Config settings property from a reference ``Inter``
 ## The Dependency Inversion Principle, Pt 1 
 coming soon...
 
