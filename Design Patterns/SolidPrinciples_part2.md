@@ -14,8 +14,11 @@ Interface - non-implementable type representing public methods and properties. P
 
 ### The Problem
 Walk-through a "Membership Provider", which has a very large interface.  
-LoginControl - only uses "ValidateUser" method in large "MembershipProvider" interface. So creating a custom membership provider based off that interface, the rest of that interface will have to be implemented.
+LoginControl - only uses "ValidateUser" method in fat "MembershipProvider" interface. So creating a custom membership provider based off that interface, the rest of that interface would have to be implemented.
+Example no. 2 - ``AboutPage`` that only needs a ``ApplicationName`` and ``AuthorName`` but instead forced to deal with large ``ConfigurationSettings`` class.
 
+### Demo 
+Create another folder ````AboutPage`` takes in a configuration file in the constructor for the class instead. If no config file is passed as parameter, it defaults to using a Config settings property from a reference ``Inter
 ## The Dependency Inversion Principle, Pt 1 
 coming soon...
 
