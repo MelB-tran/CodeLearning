@@ -14,11 +14,20 @@ Interface - non-implementable type representing public methods and properties. P
 
 ### The Problem
 Walk-through a "Membership Provider", which has a very large interface.  
-LoginControl - only uses "ValidateUser" method in fat "MembershipProvider" interface. So creating a custom membership provider based off that interface, the rest of that interface would have to be implemented.
-Example no. 2 - ``AboutPage`` that only needs a ``ApplicationName`` and ``AuthorName`` but instead forced to deal with large ``ConfigurationSettings`` class.
+- LoginControl: only uses "ValidateUser" method in fat "MembershipProvider" interface. So creating a custom membership provider based off that interface, the rest of that interface would have to be implemented.
+- Example no. 2: ``AboutPage`` that only needs a ``ApplicationName`` and ``AuthorName`` but instead forced to deal with large ``ConfigurationSettings`` class.
 
 ### Demo 
-Create another folder ``AboutPage`` takes in a configuration file in the constructor for the class instead. If no config file is passed as parameter, it defaults to using a Config settings property from a reference ``Inter``
+Example no. 2  
+**1st Refactor**
+Create a folder for Refactoring (Configuration2), adding new public class ``AboutPage`` that takes in a configuration file in the constructor for the class instead. It defaults to using a default ``Configurationsettings.Settings`` property from the pre-refactored class ``Configuration1`` . Otherwise, it takes an ``IConfigurationSettings`` object that *only* handles stuff specific to configuration.
+In test method, you can test only for the Author name and title contents, using this interface into a new ``Settings`` class (but you're still having to implement the rest of unused methods in the class)
+**2nd Refactor**
+create a complete new interface ``IApplicationIdentitySettings`` in a new ``AboutPage``  with only fields needed (applicatioName and authorName).  
+Problem: former ``IConfigurationSettings`` would not be able to be used in the constructor in this new page class.  
+So... Make ``IConfigurationSettings`` inherit from 
+``IApplicationIdentitySettings`` !! The constructor that only takes ``IApplicationIdentitySettings`` will now accept ``IConfigurationSettings`` too.
+
 ## The Dependency Inversion Principle, Pt 1 
 coming soon...
 
