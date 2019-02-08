@@ -27,6 +27,26 @@ create a complete new interface ``IApplicationIdentitySettings`` in a new ``Abou
 Problem: former ``IConfigurationSettings`` would not be able to be used in the constructor in this new page class.  
 So... Make ``IConfigurationSettings`` inherit from 
 ``IApplicationIdentitySettings`` !! The constructor that only takes ``IApplicationIdentitySettings`` will now accept ``IConfigurationSettings`` too.
+### Design Tips
+- implementing ``throw new NotImplementedException()`` as a way to address having a large interface but not needing to implement all methods, is a violation of ISP! refactor so this doesn't happen
+- client references a class but only uses small portion of it (fixing at the children instead of the parent, can break a class)
+**when to fix?**  
+Once there is pain, but also when you're depending on a "fat interface":
+- Create a smaller interface with just what you need
+- Have the fat interface implement your new interface
+- Reference the new interface within your code  
+When it's fat interfaces that cannot be customized
+- Create a smaller interface with just what's needed
+- Implement this interface using an Adapter that implements the full interface. [Adapter Pattern, from dofactory](https://www.dofactory.com/net/adapter-design-pattern)  
+**ISP Tips**  
+- Keep interfaces small, cohesive, and focused
+- Whenever possible, let the client define the interface (what it needs)
+- Whenever possible, package the interface with the client (2nd - package interface in a third assembly both the client and implementation depend upon; 3rd - package interfaces with their implementation)
+
+### Summary
+- Don't force client code to depend on things it doens't need 
+- Keep intercaes lean and focused
+- Refactor large itnerfaces so they inherit small interfaces
 
 ## The Dependency Inversion Principle, Pt 1 
 coming soon...
