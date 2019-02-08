@@ -49,7 +49,26 @@ When it's fat interfaces that cannot be customized
 - Refactor large itnerfaces so they inherit small interfaces
 
 ## The Dependency Inversion Principle, Pt 1 
-coming soon...
+Rlly important for o-o design
+### DIP Defined
+High-level modules should not depend on low-level modules. Both should depend on *abstractions*  
+Abstractions should not depend on details. Details should depend on abstractions  
+**What are dependencies?** 
+things a program/app depends on. Like Framework (but something you don't expect much and not really applicable to this principle), but others:
+- Access to third pary libraries: things that will change frequently. Want to inject alternate implementations
+- Database :  
+
+### The Problem
+xxx
+
+### An Example
+xxx
+
+### Refactoring to Appli DIP
+xxx
+
+### Related Fundamentals 
+xxx
 
 ## The Dependency Inversion Principle, Pt 2
 coming soon...
