@@ -54,9 +54,16 @@ Rlly important for o-o design
 High-level modules should not depend on low-level modules. Both should depend on *abstractions*  
 Abstractions should not depend on details. Details should depend on abstractions  
 **What are dependencies?** 
-things a program/app depends on. Like Framework (but something you don't expect much and not really applicable to this principle), but others:
-- Access to third pary libraries: things that will change frequently. Want to inject alternate implementations
-- Database :  
+things a program/app depends on. Like Framework (but something you don't expect much change through the course of development and not really applicable to this principle), but others:
+- Access to third pary libraries: things that will change frequently. Want to be able to inject alternate implementations of these 3rd party libraries unles we're certain that they're not likely to change for lifetime of application.  
+- Database: want to wrap in such a way that it is not an "implicit" dependency within the code, but rather something that could be injected or replaced
+- File System: less obvious
+- Email : email from POP box
+- Web services: any network acces sat all
+- System resources: accessing clock or date time. represent furter dependencies requireing to invest in situations that affect behavior of the application - no way to test unless run at specific times
+- Configuration: in terms of files that you use for configuring app.
+- The ``new`` Keyword - limit spaces where you instantiate new objects (What...) unless they're primitives like strings
+- Static methods: everytime a static method is called, a dependency is added that cannot easily be separated from the calling code - especially for testing or changing (STOP Here, not sure I get this hmm)
 
 ### The Problem
 xxx
