@@ -1,0 +1,9 @@
+
+## The Don't Repeat Yourself Principle, Pt 1 
+coming soon...
+
+## The Don't Repeat Yourself Principle, Pt 2 
+coming soon...
+
+## The Don't Repeat Yourself Principle, Pt 3
+coming soon...
