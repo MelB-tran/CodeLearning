@@ -4,7 +4,8 @@ Course Notes from Plurasight course - [See Part 1](https://github.com/MelB-tran/
 [O - Open/Closed (part 1)](https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_part1.md#the-open-closed-principle)  
 [L - Liskov Substitution (part 1)](https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_part1.md#liskov-substitution-principle)  
 [I - Interface Segregation](#the-interface-segregation-principle)  
-[D - Dependency Inversion](#the-dependency-inversion-principle-pt-1)  
+[D - Dependency Inversion, pt 1](#the-dependency-inversion-principle-pt-1)  
+[D - Dependency Inversion, pt 2](#the-dependency-inversion-principle-pt-2)  
 [D - Don't Repeat Yourself](https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_pt3.md)
 
 ## The Interface Segregation Principle ##
