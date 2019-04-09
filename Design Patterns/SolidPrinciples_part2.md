@@ -75,8 +75,8 @@ Class instantiation/call stak logic scattered through all modules - violates SRP
 ----------
 Class constructors should require dependencies the class needs - **explicit** dependencies  
 Classes should declare what they need!  
-``
-  public class HelloWorldExplicit
+```
+public class HelloWorldExplicit
   {
     private readonly DateTime _timeofGreeting;
     
@@ -89,7 +89,7 @@ Classes should declare what they need!
       // uses _timeOfGreeting to output corresponding hello
     }
   }
-``  
+ ```  
 here, the example changed by removing dependency on DateTime.hour, and added explicitly
 
 ### Demo
