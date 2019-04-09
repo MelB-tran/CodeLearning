@@ -5,7 +5,6 @@ Course Notes from Plurasight course - [See Part 1](https://github.com/MelB-tran/
 [L - Liskov Substitution (part 1)](https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_part1.md#liskov-substitution-principle)  
 [I - Interface Segregation](#the-interface-segregation-principle)  
 [D - Dependency Inversion](#the-dependency-inversion-principle-pt-1)  
-[D - Don't Repeat Yourself](#the-dont-repeat-yourself-principle-pt-1)  
 
 ## The Interface Segregation Principle ##
 ISP - clients should not be forced to depend on unused methods  
@@ -114,7 +113,7 @@ Order has hidden dependencies:
 
 Result
 * Tight coupling
-* No way to change implementation details ( [https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_part1.md#the-open-closed-principle](OCP) violation)
+* No way to change implementation details ( [OCP](https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_part1.md#the-open-closed-principle) violation)
 * Difficult to test
 
 #### Dependency Injection
