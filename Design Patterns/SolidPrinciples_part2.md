@@ -74,7 +74,7 @@ Class instantiation/call stak logic scattered through all modules - violates SRP
 
 ----------
 Class constructors should require dependencies the class needs - **explicit** dependencies  
-Classes should declare what they need!
+Classes should declare what they need!  
 ``
   public class HelloWorldExplicit
   {
@@ -89,7 +89,7 @@ Classes should declare what they need!
       // uses _timeOfGreeting to output corresponding hello
     }
   }
-``
+``  
 here, the example changed by removing dependency on DateTime.hour, and added explicitly
 
 ### Demo
@@ -98,7 +98,7 @@ Method runs ChargeCard(...)  ReserveInventory(...) and NotifyCustomer(...)
 With NotifyCustomer(...) having a mail dependency (smtp, ``mailMessage(...)``, ``datetime``, and exception catch  
 ReserveInventory(...) instantiates ``new InventorySystem()`` and ``new PaymentGateway()``  
 
-What's the problem? if you're going to test "Order" class, it's going to take effort to inect the stuff it requires.
+What's the problem? if you're going to test "Order" class, it's going to take effort to inject the stuff it requires.
 * 1st test added, no notify but can't assume that it's successful other than it didn't throw an exception
 * 2nd test added, yes notify but because no SMTP server running, test fails. you could write fake smtp message. various hacks to get around it (including smtp4dev ;), test database etc)
 * but having to put together infrastructure just to test logic of class, or specifically test the parts that you actually care about, it's not psosible (ie messaging working regardless of the specific process)
@@ -114,7 +114,7 @@ Order has hidden dependencies:
 
 Result
 * Tight coupling
-* No way to change implementation details ( (OCP)[https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_part1.md#the-open-closed-principle] violation)
+* No way to change implementation details ( [https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_part1.md#the-open-closed-principle](OCP) violation)
 * Difficult to test
 
 #### Dependency Injection
@@ -124,7 +124,7 @@ A technique that is used to allow calling code to inject dependencies a class ne
 * Property Injection - also known as setter injection. PROS: dependency can be changed at any time during object lifetime, very flexible. CONS: objects may be in invalid state between construction and setting of dependentcies via setters, less intuitive (may need documentation to make sense)
 * Parameter Injection - dependencies passed in via a method parameter. PROS: most granular, flexible, requires no changes to rest of class. CONS: breaks method signature, can result in many parameters *consider only if one method has the dependency, otherwise prefer constructor injection* cause it's explicit to anyone using code what esactly is needed.
 
-Other methods exist too, like service location etc
+Other methods exist too, like service location (lookup) etc
 
 ### Refactoring to Apply DIP
 Basic steps:
@@ -133,17 +133,9 @@ Basic steps:
 * Reduce responsibilities for  
 
 - constructor injection in Order class - add constructor with, cart field, paymentdetails, 
+
 ### Related Fundamentals 
 xxx
 
 ## The Dependency Inversion Principle, Pt 2
-coming soon...
-
-## The Don't Repeat Yourself Principle, Pt 1 
-coming soon...
-
-## The Don't Repeat Yourself Principle, Pt 2 
-coming soon...
-
-## The Don't Repeat Yourself Principle, Pt 3
 coming soon...
