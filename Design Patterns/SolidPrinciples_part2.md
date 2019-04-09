@@ -131,9 +131,15 @@ Other methods exist too, like service location (lookup) etc
 Basic steps:
 * Extract dependencies into interfaces
 * Inject implementations of itnerfaces into ``Order``
-* Reduce responsibilities for  
+* Reduce responsibilities by applying (SRP)[#]
 
-- constructor injection in Order class - add constructor with, cart field, paymentdetails, 
+Order has number of dependencies so address by
+1. constructor injection in ``Order`` class with ``Cart`` and ``PaymentDetails`` field parameters, where the class has ``private readonly`` fields for each parameter (renamed with syntax ``_nameofParameter``)
+2. create interface in same class for now ``INotifyService`` with ``void NotifyCustomer(Cart cart)`` signature method
+3. create derived type (class) that inherits interface in step 2 as ``NotifyService`` that defines ``NotifyCustomer(Cart cart)`` method within it
+4. pass in ``INotifyService notifyService`` into constructor created in step 1
+5. in methods where these methods were being used (ex. ``NotifyCustomer(...)``), replace with the call to ``private readonly`` service: ``_notifyService.NotifyCustomer(cart)``  
+this removes dependency within ``Order`` for SMTP, and can be used for other dependencies too :)
 
 ### Related Fundamentals 
 xxx
