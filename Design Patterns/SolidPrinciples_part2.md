@@ -130,7 +130,7 @@ Other methods exist too, like service location (lookup) etc
 ### Refactoring to Apply DIP
 Basic steps:
 * Extract dependencies into interfaces
-* Inject implementations of itnerfaces into ``Order``
+* Inject implementations of interfaces into ``Order``
 * Reduce responsibilities by applying (SRP)[#]
 
 Order has number of dependencies so address by
@@ -141,6 +141,40 @@ Order has number of dependencies so address by
 5. in methods where these methods were being used (ex. ``NotifyCustomer(...)``), replace with the call to ``private readonly`` service: ``_notifyService.NotifyCustomer(cart)``  
 this removes dependency within ``Order`` for SMTP, and can be used for other dependencies too :)
 
+Injecting implementations of interfaces
+Remove payment processing, reservation of products, and notification out of ``Order`` class. So you end up with something like
+```
+  private readonly [for each parameter passed]
+  // constructor
+  public OnlineOrder(Cart cart, 
+                     PaymentDetails paymentDetails,
+                     IPaymentProcessor paymentProcessor,
+                     IReservationService reservationService,
+                     INotificationService notificationService) : base(cart)
+                     { ... }
+```
+this makes it easy to test the class through the use of "fake implementations", for example:
+```
+[TestMethod]
+public void SendTotalAmountToCreditCardProcessor(){
+  var paymentProcessor = new FakePaymentProcessor();
+  var reservationService = new FakeReservationService();
+  var notificationService = new FakeNotificationService();
+  
+  var cart = new Cart{ TotalAmount = 5.05m};
+  var paymentDetails = new PaymentDetails(){
+     PaymentMethod = PaymentMethod.CreditCard };
+  var order = new OnlineOrder(cart, 
+                              paymentDetails, 
+                              paymentProcessor, 
+                              reservationService,
+                              notificationServie);
+  order.CheckOut();
+  
+  Assert.IsTrue(paymentProcesor.WasCalled);
+  Assert.AreEqual(cart.TotalAmount, paymentProcessor.AmountPassed);
+}
+```
 ### Related Fundamentals 
 xxx
 
