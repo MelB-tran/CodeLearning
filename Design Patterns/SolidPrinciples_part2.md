@@ -142,7 +142,7 @@ Order has number of dependencies so address by
 this removes dependency within ``Order`` for SMTP, and can be used for other dependencies too :)
 
 Injecting implementations of interfaces
-Remove payment processing, reservation of products, and notification out of ``Order`` class. So you end up with something like
+Remove payment processing, reservation of products, and notification out of ``Order`` class (while copying + pasting code from non-refactored class). So you end up with something like (now ``OnlineOrder``)
 ```
   private readonly [for each parameter passed]
   // constructor
@@ -161,7 +161,7 @@ public void SendTotalAmountToCreditCardProcessor(){
   var reservationService = new FakeReservationService();
   var notificationService = new FakeNotificationService();
   
-  var cart = new Cart{ TotalAmount = 5.05m};
+  var cart = new Cart{ TotalAmount = 5.05m };
   var paymentDetails = new PaymentDetails(){
      PaymentMethod = PaymentMethod.CreditCard };
   var order = new OnlineOrder(cart, 
@@ -175,6 +175,55 @@ public void SendTotalAmountToCreditCardProcessor(){
   Assert.AreEqual(cart.TotalAmount, paymentProcessor.AmountPassed);
 }
 ```
+Payment processor does not support what's called "AmountPassed", so where are these coming from? within the FakePaymentProcessor:
+```
+class FakePaymentProcessor : IPaymentProcessor
+{
+  public decimal AmountPassed = 0;
+  public bool WasCalled = false;
+  public void ProcessCreditCard(PaymentDetails paymentDetails, detail amount){
+    WasCalled = true;
+    AmountPassed = amount;
+  }
+}
+```
+What you're trying to verify that method was called and amount expected passed - not needing to test entire process. this design pattern allows you to isolate diff parts to test for specifics without having to implement fully
+
+After this breakdown, a lot of dependencies on concrete classes ``Order`` had were taken away, and replaced with interfaces, modeled after what the specific class needs:
+- ReservationService
+- PaymentProcessor
+- NotificationService
+
+### Design Smells in DIP
+**Use of new keyword** actual instantiations of classes rather than interfaces... if it has external dependencies, the code around it has inherited that dependency
+```
+foreach(var item in cart.Items){
+  try
+  {
+    var inventorySystem =  new InventorySystem();
+    inventorySystem.Reserve(item.Sku, item.Quantity);
+  }
+ }
+ ```
+ **Use of static methods/properties** as simple as a ``DateTime.Now`` instead of an actual datetime passed in or an abstraction (like ICalendar, IDateTime) that supports method date passed in.
+ ```
+ message.Subject = "Your order placed on " + Datetime.Now.ToString();
+ ```
+ Or  also using static methods a "facade" layers for your data access - a static method talking directly to database, there's no way to remove that dependency to the database. 
+ ```
+ DataAccess.SaveCustomer(myCostumer);
+ ```
+Static methods could be used where they don't touch anything other than the parameters passed in - not creating dependencies on something external
+
+### Where do we instantiate objects?
+Typically when DIP is applied, is having many small interfaces (good, cohesive, losely coupled, interface segregation) but you have to create these objects eventually.
+- **Default Constructor*** that "news up" the instances you expect to typically need in your application (like ``OnlineOrder`` above. Able to implement various implementetions of actual interface. Referred to as "poor man's dependency injection" or "poor man's IoC"
+- **Manual** manually instantiating whatever is needed in your application's startup routine or main() method
+- **IoC Container** Use an "Inversion of Control" Container with a bunch of features that it supports to wire up in a "smart" fashion
+
+### IoC Containers
+- Responsible for object graph instantiation:
+
 ### Related Fundamentals 
 xxx
 
