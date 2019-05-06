@@ -222,10 +222,29 @@ Typically when DIP is applied, is having many small interfaces (good, cohesive, 
 - **IoC Container** Use an "Inversion of Control" Container with a bunch of features that it supports to wire up in a "smart" fashion
 
 ### IoC Containers
-- Responsible for object graph instantiation:
+- Responsible for object graph instantiation
+- Initiated at appilcation startup via code or configuration
+- Managed interfaces and the implementation tobe used are *Registered* with the container
+- Dependencies on interfaces are *Resolved* at application startup or runtime - creating "dependency graph"
 
-### Related Fundamentals 
-xxx
+**examples**  
+- MicrosoftUnity
+- StructureMap
+- Ninject
+- Windsor
+- Funq/Munq
+
+### Summary
+- Depend on abstractions rather than concrete types
+- avoid forcing high level modules depend on low-level modules through direct instantiation, static method, or property calls
+- declare class dependencie explicitly in the constructors
+- inject dependencies via constructor, property, or parameter injection
+
+**Related Fundamentals**
+- Single Responsibility Principle
+- Interface Segregation Principle
+- Facade Pattern
+- Inversion of Control (IoC) Containers
 
 ## The Dependency Inversion Principle, Pt 2
 coming soon...
