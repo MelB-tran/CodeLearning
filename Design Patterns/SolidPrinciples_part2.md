@@ -4,10 +4,11 @@ Course Notes from Plurasight course - [See Part 1](https://github.com/MelB-tran/
 [O - Open/Closed (part 1)](https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_part1.md#the-open-closed-principle)  
 [L - Liskov Substitution (part 1)](https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_part1.md#liskov-substitution-principle)  
 [I - Interface Segregation](#the-interface-segregation-principle)  
-[D - Dependency Inversion](#the-dependency-inversion-principle-pt-1)  
-[D - Don't Repeat Yourself](#the-dont-repeat-yourself-principle-pt-1)  
+[D - Dependency Inversion, pt 1](#the-dependency-inversion-principle-pt-1)  
+[D - Dependency Inversion, pt 2](#the-dependency-inversion-principle-pt-2)  
+[D - Don't Repeat Yourself](https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_pt3.md)
 
-## The Interface Segregation Principle
+## The Interface Segregation Principle ##
 ISP - clients should not be forced to depend on unused methods  
 **corollary** - prefer small, cohesive interfaces to "fat" interfaces 
 Interface - non-implementable type representing public methods and properties. Public interface of a class
@@ -27,18 +28,223 @@ create a complete new interface ``IApplicationIdentitySettings`` in a new ``Abou
 Problem: former ``IConfigurationSettings`` would not be able to be used in the constructor in this new page class.  
 So... Make ``IConfigurationSettings`` inherit from 
 ``IApplicationIdentitySettings`` !! The constructor that only takes ``IApplicationIdentitySettings`` will now accept ``IConfigurationSettings`` too.
+### Design Tips
+- implementing ``throw new NotImplementedException()`` as a way to address having a large interface but not needing to implement all methods, is a violation of ISP! refactor so this doesn't happen
+- client references a class but only uses small portion of it (fixing at the children instead of the parent, can break a class)
+**when to fix?**  
+Once there is pain, but also when you're depending on a "fat interface":
+- Create a smaller interface with just what you need
+- Have the fat interface implement your new interface
+- Reference the new interface within your code  
+When it's fat interfaces that cannot be customized
+- Create a smaller interface with just what's needed
+- Implement this interface using an Adapter that implements the full interface. [Adapter Pattern, from dofactory](https://www.dofactory.com/net/adapter-design-pattern)  
+**ISP Tips**  
+- Keep interfaces small, cohesive, and focused
+- Whenever possible, let the client define the interface (what it needs)
+- Whenever possible, package the interface with the client (2nd - package interface in a third assembly both the client and implementation depend upon; 3rd - package interfaces with their implementation)
 
-## The Dependency Inversion Principle, Pt 1 
-coming soon...
+### Summary
+- Don't force client code to depend on things it doens't need 
+- Keep intercaes lean and focused
+- Refactor large itnerfaces so they inherit small interfaces
+
+## The Dependency Inversion Principle, Pt 1 ##
+Rlly important for o-o design ###
+### DIP Defined
+High-level modules should not depend on low-level modules. Both should depend on *abstractions*  
+Abstractions should not depend on details. Details should depend on abstractions  
+#### Dependencies defined
+Things a program/app depends on. Like Framework (but something you don't expect much change through the course of development and not really applicable to this principle), but others (most common in .NET applications):
+- Access to third pary libraries: things that will change frequently. Want to be able to inject alternate implementations of these 3rd party libraries unles we're certain that they're not likely to change for lifetime of application.  
+- Database: want to wrap in such a way that it is not an "implicit" dependency within the code, but rather something that could be injected or replaced
+- File System: less obvious
+- Email : email from POP box
+- Web services: any network acces sat all
+- System resources: accessing clock or date time. represent furter dependencies that might require to invest in situations that affect behavior of the application - no way to test unless run at specific times
+- Configuration: in terms of files that you use for configuring your app.
+- The ``new`` Keyword - you want to limit places in app where you instantiate new objects (why?) unless they're primitives like strings
+- Static methods: everytime a static method is called, a dependency is added that cannot easily be separated from the calling code - in case of tests or changing how code works throughout entire app with one startup file/config file
+- thread.sleep
+- Random - hard to test code that uses random values
+- etc
+#### Dependencies and Traditional Programming
+In traditional programming, typical for high level modules to call lower level modules. User interface depending on business logic, business logic depending on data access.  
+Static methods are used for convenience  
+Class instantiation/call stak logic scattered through all modules - violates SRP  
+
+----------
+Class constructors should require dependencies the class needs - **explicit** dependencies  
+Classes should declare what they need!  
+```
+public class HelloWorldExplicit
+  {
+    private readonly DateTime _timeofGreeting;
+    
+    public HelloWorldExplicit(DateTime timeOfGreeting)
+    {
+      _timeOfGreeting = timeOfGreeting;
+    }
+    
+    public string Hello(string name){
+      // uses _timeOfGreeting to output corresponding hello
+    }
+  }
+ ```  
+here, the example changed by removing dependency on DateTime.hour, and added explicitly
+
+### Demo
+Looks at a commerce application including an ``Order`` class with checkout method with purchased items, payment details, and bool flag to notify customer  
+Method runs ChargeCard(...)  ReserveInventory(...) and NotifyCustomer(...)  
+With NotifyCustomer(...) having a mail dependency (smtp, ``mailMessage(...)``, ``datetime``, and exception catch  
+ReserveInventory(...) instantiates ``new InventorySystem()`` and ``new PaymentGateway()``  
+
+What's the problem? if you're going to test "Order" class, it's going to take effort to inject the stuff it requires.
+* 1st test added, no notify but can't assume that it's successful other than it didn't throw an exception
+* 2nd test added, yes notify but because no SMTP server running, test fails. you could write fake smtp message. various hacks to get around it (including smtp4dev ;), test database etc)
+* but having to put together infrastructure just to test logic of class, or specifically test the parts that you actually care about, it's not psosible (ie messaging working regardless of the specific process)
+
+### The Problem
+Order has hidden dependencies:
+* MailMessage
+* SmtpClient
+* InventorySystem
+* PaymentGateway
+* Logger
+* DateTime.Now
+
+Result
+* Tight coupling
+* No way to change implementation details ( [OCP](https://github.com/MelB-tran/CodeLearning/blob/master/Design%20Patterns/SolidPrinciples_part1.md#the-open-closed-principle) violation)
+* Difficult to test
+
+#### Dependency Injection
+A technique that is used to allow calling code to inject dependencies a class needs when it is instantiated  
+**Three Primary Techniques**
+* Constructor Injection - strategy pattern where dependencies are passed via constructor. PROS: self-documenting, works well with our without a container, classes are always in a valid state once constructed. CONS: too many params/dependencies; some features (like serialization) may require a *default* constructor, like a parameter list constructor; some methods in class may not require things other methods require (maybe refactor to methods that do share dependencies)
+* Property Injection - also known as setter injection. PROS: dependency can be changed at any time during object lifetime, very flexible. CONS: objects may be in invalid state between construction and setting of dependentcies via setters, less intuitive (may need documentation to make sense)
+* Parameter Injection - dependencies passed in via a method parameter. PROS: most granular, flexible, requires no changes to rest of class. CONS: breaks method signature, can result in many parameters *consider only if one method has the dependency, otherwise prefer constructor injection* cause it's explicit to anyone using code what esactly is needed.
+
+Other methods exist too, like service location (lookup) etc
+
+### Refactoring to Apply DIP
+Basic steps:
+* Extract dependencies into interfaces
+* Inject implementations of interfaces into ``Order``
+* Reduce responsibilities by applying (SRP)[#]
+
+Order has number of dependencies so address by
+1. constructor injection in ``Order`` class with ``Cart`` and ``PaymentDetails`` field parameters, where the class has ``private readonly`` fields for each parameter (renamed with syntax ``_nameofParameter``)
+2. create interface in same class for now ``INotifyService`` with ``void NotifyCustomer(Cart cart)`` signature method
+3. create derived type (class) that inherits interface in step 2 as ``NotifyService`` that defines ``NotifyCustomer(Cart cart)`` method within it
+4. pass in ``INotifyService notifyService`` into constructor created in step 1
+5. in methods where these methods were being used (ex. ``NotifyCustomer(...)``), replace with the call to ``private readonly`` service: ``_notifyService.NotifyCustomer(cart)``  
+this removes dependency within ``Order`` for SMTP, and can be used for other dependencies too :)
+
+Injecting implementations of interfaces
+Remove payment processing, reservation of products, and notification out of ``Order`` class (while copying + pasting code from non-refactored class). So you end up with something like (now ``OnlineOrder``)
+```
+  private readonly [for each parameter passed]
+  // constructor
+  public OnlineOrder(Cart cart, 
+                     PaymentDetails paymentDetails,
+                     IPaymentProcessor paymentProcessor,
+                     IReservationService reservationService,
+                     INotificationService notificationService) : base(cart)
+                     { ... }
+```
+this makes it easy to test the class through the use of "fake implementations", for example:
+```
+[TestMethod]
+public void SendTotalAmountToCreditCardProcessor(){
+  var paymentProcessor = new FakePaymentProcessor();
+  var reservationService = new FakeReservationService();
+  var notificationService = new FakeNotificationService();
+  
+  var cart = new Cart{ TotalAmount = 5.05m };
+  var paymentDetails = new PaymentDetails(){
+     PaymentMethod = PaymentMethod.CreditCard };
+  var order = new OnlineOrder(cart, 
+                              paymentDetails, 
+                              paymentProcessor, 
+                              reservationService,
+                              notificationServie);
+  order.CheckOut();
+  
+  Assert.IsTrue(paymentProcesor.WasCalled);
+  Assert.AreEqual(cart.TotalAmount, paymentProcessor.AmountPassed);
+}
+```
+Payment processor does not support what's called "AmountPassed", so where are these coming from? within the FakePaymentProcessor:
+```
+class FakePaymentProcessor : IPaymentProcessor
+{
+  public decimal AmountPassed = 0;
+  public bool WasCalled = false;
+  public void ProcessCreditCard(PaymentDetails paymentDetails, detail amount){
+    WasCalled = true;
+    AmountPassed = amount;
+  }
+}
+```
+What you're trying to verify that method was called and amount expected passed - not needing to test entire process. this design pattern allows you to isolate diff parts to test for specifics without having to implement fully
+
+After this breakdown, a lot of dependencies on concrete classes ``Order`` had were taken away, and replaced with interfaces, modeled after what the specific class needs:
+- ReservationService
+- PaymentProcessor
+- NotificationService
+
+### Design Smells in DIP
+**Use of new keyword** actual instantiations of classes rather than interfaces... if it has external dependencies, the code around it has inherited that dependency
+```
+foreach(var item in cart.Items){
+  try
+  {
+    var inventorySystem =  new InventorySystem();
+    inventorySystem.Reserve(item.Sku, item.Quantity);
+  }
+ }
+ ```
+ **Use of static methods/properties** as simple as a ``DateTime.Now`` instead of an actual datetime passed in or an abstraction (like ICalendar, IDateTime) that supports method date passed in.
+ ```
+ message.Subject = "Your order placed on " + Datetime.Now.ToString();
+ ```
+ Or  also using static methods a "facade" layers for your data access - a static method talking directly to database, there's no way to remove that dependency to the database. 
+ ```
+ DataAccess.SaveCustomer(myCostumer);
+ ```
+Static methods could be used where they don't touch anything other than the parameters passed in - not creating dependencies on something external
+
+### Where do we instantiate objects?
+Typically when DIP is applied, is having many small interfaces (good, cohesive, losely coupled, interface segregation) but you have to create these objects eventually.
+- **Default Constructor*** that "news up" the instances you expect to typically need in your application (like ``OnlineOrder`` above. Able to implement various implementetions of actual interface. Referred to as "poor man's dependency injection" or "poor man's IoC"
+- **Manual** manually instantiating whatever is needed in your application's startup routine or main() method
+- **IoC Container** Use an "Inversion of Control" Container with a bunch of features that it supports to wire up in a "smart" fashion
+
+### IoC Containers
+- Responsible for object graph instantiation
+- Initiated at appilcation startup via code or configuration
+- Managed interfaces and the implementation tobe used are *Registered* with the container
+- Dependencies on interfaces are *Resolved* at application startup or runtime - creating "dependency graph"
+
+**examples**  
+- MicrosoftUnity
+- StructureMap
+- Ninject
+- Windsor
+- Funq/Munq
+
+### Summary
+- Depend on abstractions rather than concrete types
+- avoid forcing high level modules depend on low-level modules through direct instantiation, static method, or property calls
+- declare class dependencie explicitly in the constructors
+- inject dependencies via constructor, property, or parameter injection
+
+**Related Fundamentals**
+- Single Responsibility Principle
+- Interface Segregation Principle
+- Facade Pattern
+- Inversion of Control (IoC) Containers
 
 ## The Dependency Inversion Principle, Pt 2
-coming soon...
-
-## The Don't Repeat Yourself Principle, Pt 1 
-coming soon...
-
-## The Don't Repeat Yourself Principle, Pt 2 
-coming soon...
-
-## The Don't Repeat Yourself Principle, Pt 3
 coming soon...
