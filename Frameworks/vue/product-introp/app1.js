@@ -10,12 +10,25 @@ var app = new Vue({
     variants: [
       {
         variantId:2234,
-        variantColor: "green"
+        variantColor: 'green',
+        variantImage: './assets/3890792.jpg'
       },
       {
         variantId: 2235,
-        variantColor: "blue"
+        variantColor: 'pink',
+        variantImage: './assets/3890792-pink.jpg'
       }
-    ]
+    ],
+    cart: 0
+  },
+  methods: {
+    // anonymous function
+    addToCart: function(){
+      this.cart += 1
+    },
+    // function can also be written esx shorthand, but not all browsers may support
+    updateProduct(variantImage){
+      this.image = variantImage
+    }
   }
 })
