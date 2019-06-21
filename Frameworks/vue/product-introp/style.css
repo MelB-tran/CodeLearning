@@ -1,0 +1,14 @@
+.product-image{
+  display: inline-block;
+  width: 220px;
+  border:1px solid gray;
+}
+.product-image img{
+  max-width:200px;
+  margin:3%;
+}
+.product-info{
+  margin: 2%;
+  width: 45%;
+  display: inline-block;
+}

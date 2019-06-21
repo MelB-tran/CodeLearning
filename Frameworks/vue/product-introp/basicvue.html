@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Product app</title>
+    <link rel="stylesheet" type="text/css"
+     href="style.css" media="screen" />
+  </head>
+  <body>
+    <div class="nav-bar"></div>
+    <div id="app">
+      <div class="product">
+        <div class="product-image">
+          <!-- v-bind dynamically binds an attribute to an expression -->
+          <img v-bind:src="image"/>
+        </div>
+        <div class="product-info">
+          <h1>{{ product }}</h1>
+          <!-- this is also v-bind, you only need the colon!-->
+          <p v-if="inventory > 10">In Stock</p>
+          <p v-else-if="inventory <= 10 && inventory> 0">Almost gone!</p>
+          <p v-else>Out of Stock</p>
+          <a :href="link">link</a>
+
+          <ul>
+            <li v-for="detail in details"> {{ detail }}</li>
+          </ul>
+          <!-- add :key so vue keeps up with identifier for each item -->
+          <div v-for="variant in variants" :key="variant.variantId">
+            <p>{{ variant.variantColor }} </p>
+          </div>
+      </div>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="app1.js"></script>
+  </body>
+</html>
