@@ -45,3 +45,20 @@ const app = new Vue({
 * like asp, it lets you add methods at diff stages of 'lifecycle', called "Lifecycle Hooks"
 only for created, mounted, updated, destroyed - Lifecycle Diagram
 Template Syntax
+
+### Methods and events
+may be written as ``v-on:click``
+or also as ``@mouseover`` for DOM element, setting method which can also take parameters from object in that context, such as  
+```
+<div v-for="variant in variants" :key="variant.variantId">
+  <p @mouseover="updateProduct(variant.variantImage)">{{ variant.variantColor }} </p>
+</div>
+```
+when writing to js and Vue instance, you can write methods as
+* anonymous functions - supported by most browsers ``addToCart: function(){..}``
+* esx shorthand - not supported all browsers `` updateProduct(parameter){...} ``
+other events Include
+* ``@click="..."``
+* on a form ``@submit="..."``
+* on an input ``@keyup.enter="..."``
+Documentation: [Event handling](https://vuejs.org/v2/guide/events.html)
