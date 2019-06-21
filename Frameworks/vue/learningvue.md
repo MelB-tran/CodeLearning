@@ -3,7 +3,7 @@ formed of various reusable components (ie header and navigation, footer, etc), e
 
 *there is a Chrome plugin!!*
 
-###What makes it useful?
+### What makes it useful?
 Include vue script src file in HTML file
 and adding vue inside script tags
 vue instance as follows:
@@ -37,7 +37,7 @@ const app = new Vue({
 });
 </script>
 ```
-###The Vue Instance
+### The Vue Instance
 * Reactive
 * each component is a new vue instance and share most of basic stuff except for some "root' properties
 * An instance's $data with properties - only updates properties present at initialization
