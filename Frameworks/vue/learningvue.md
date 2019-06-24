@@ -45,7 +45,32 @@ const app = new Vue({
 * like asp, it lets you add methods at diff stages of 'lifecycle', called "Lifecycle Hooks"
 only for created, mounted, updated, destroyed - Lifecycle Diagram
 Template Syntax
-
+* to pass data inside a component, use props (in this example, an array)
+```
+Vue.component('product', {
+  props: [message],
+  template: '<div>...</div>',
+  data() {...}
+  })
+```
+and HTML
+```
+<product message="hello!"></product>
+```
+Props can also be passed as an object
+```
+Vue.component('product', {
+  props: {
+    message: {
+      type: String,
+      required:true,
+      default: "hi"
+    }
+  },
+  template: '<div>...</div>',
+  data() {...}
+  })
+```
 ### Methods and events
 may be written as ``v-on:click``
 or also as ``@mouseover`` for DOM element, setting method which can also take parameters from object in that context, such as  
@@ -62,3 +87,37 @@ other events Include
 * on a form ``@submit="..."``
 * on an input ``@keyup.enter="..."``
 Documentation: [Event handling](https://vuejs.org/v2/guide/events.html)
+**Style banding**  
+``:style="{backgroundColor: variant.variantColor}"`` used to dynamically bind styles based on data.  
+you can also be bound to a 'styleObject' inside *data* that
+is a set of CSS properties instead of a single one
+AND also an array of styleObjects if needed!
+
+**Class binding**  
+Can dynamically add a class based on whether values on the right are true
+```:class="{ active: activeClass, 'text-danger': errorClass }"
+  [inside Javascript file]
+  data: {
+    activeClass: true,
+    errorClass: false
+  }
+```
+And like style, can bind an object to class as ``classObject`` with multiple class options  
+Can also add an array of classes too, which will pass text value
+Html - ``<div :class="[activeClass, errorClass]">..</div>``
+JS - ``` data: {
+  activeClass:'active',
+  errorClass: 'text-danger'
+}
+```
+Conditional logic with classes too  
+``<div :class="[isActive ? activeClass : '']">..</div>``
+Javascript
+```
+ data:{
+   isActive:true,
+   activeClass: 'active'
+ }
+```
+### computed fields
+needs to be added as separate group ``computed:{}`` where each field is syntax like ``nameofcomputedfield(){ calculation }``
