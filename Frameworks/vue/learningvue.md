@@ -121,3 +121,6 @@ Javascript
 ```
 ### computed fields
 needs to be added as separate group ``computed:{}`` where each field is syntax like ``nameofcomputedfield(){ calculation }``
+
+## Communicating events
+a component can tell its parent (root instance) that an event has occurred and send data along with the notification!

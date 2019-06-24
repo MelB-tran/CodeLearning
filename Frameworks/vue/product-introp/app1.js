@@ -45,9 +45,6 @@ Vue.component('product', {
               :disabled="!inStock"
               :class="{ disabledButton: !inStock }"
               >Add to cart</button>
-      <div class="cart">
-        <p>Cart {{cart}}</p>
-      </div>
   </div>
   `,
   // returns fresh data object with its own copy
@@ -71,13 +68,12 @@ Vue.component('product', {
         variantImage: './assets/3890792-pink.jpg',
         variantQuantity: 0
       }
-    ],
-    cart: 0
+    ]
   }},
   methods: {
     // anonymous function
     addToCart: function(){
-      this.cart += 1
+      this.$emit('add-to-cart')
     },
     // function can also be written esx shorthand, but not all browsers may support
     updateProduct(index){
@@ -107,6 +103,7 @@ Vue.component('product', {
 var app = new Vue({
   el: '#app',
   data: {
-    premium: false
+    premium: false,
+    cart: 0
   }
 })
