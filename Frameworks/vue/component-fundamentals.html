@@ -1,0 +1,36 @@
+
+    <!doctype html>
+    <html>
+    <head>
+    <title>More Vuejs</title>
+    <meta name="description" content="intro course vue school">
+    <meta name="keywords" content="intro course vue school">
+    
+    </head>
+    <body>
+        <h1>Vue.js Component Fundamentals</h1>
+        <click-counter></click-counter>
+        <div class="plans">
+        <plan name="name B"></plan>
+        <plan name="name A"></plan>
+        <plan name="name C"></plan>
+        <plan name="name E"></plan>
+        </div>
+        <script type="text/x-template" id="click-counter-template">
+            <div>
+                <p>another element</p>
+                <button @click="count++">{{count}}</button> 
+            </div>
+        </script>
+        <script type="text/x-template" id="bleep">
+            <div class="plan">
+                <div class="description">
+                <div class="title">{{name}}</div>
+                </div>
+            </div>
+        </script>
+        <script src="https://unpkg.com/vue"></script>   
+        <script src="app.js"></script>   
+        <link rel="stylesheet" href="">
+    </body>
+    </html>
