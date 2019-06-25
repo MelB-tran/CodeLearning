@@ -84,7 +84,7 @@ when writing to js and Vue instance, you can write methods as
 * esx shorthand - not supported all browsers `` updateProduct(parameter){...} ``
 other events Include
 * ``@click="..."``
-* on a form ``@submit="..."``
+* on a form ``@submit="..."`` - using ``@submit.prevennt`` also prevents default behavior on submit (refresh page)!
 * on an input ``@keyup.enter="..."``
 Documentation: [Event handling](https://vuejs.org/v2/guide/events.html)
 **Style banding**  
@@ -123,4 +123,29 @@ Javascript
 needs to be added as separate group ``computed:{}`` where each field is syntax like ``nameofcomputedfield(){ calculation }``
 
 ## Communicating events
-a component can tell its parent (root instance) that an event has occurred and send data along with the notification!
+a component can tell its parent (root instance) that an event has occurred and send data along with the notification!  
+This can be done by adding ``$emit('event-name', someData)`` for the calling method ( `` addToCart `` ), where vue will ``emit`` an event by the name in parameter and the corresponing ``someData`` along with it.
+```
+addToCart(){
+  this.$emit('add-to-cart', someData)
+}
+```
+then the ``app`` using this component will call this element like so
+`` <product @event-name="method-in-app-name"></product>`` where the ``method-in-app-name`` is defined within the calling app, using ``someData`` to perform needed operations to data within the ``app``
+
+### Two-way data binding
+two-way data binding is useful with forms when you'd like data to be transferred from template to data.
+`` v-model="name" `` inside the html element inside your Template
+
+### Custom form validation
+can be added ``onSubmit`` function because it's already calling that method on that specific event :). Just checking for length of input, and generating/displaying errors as needed
+
+### event bus
+a new vue instance, can use an "event bus" to pass information across descendent components
+
+### lifecycle Hooks
+an example, goes like an element to component like ``data``, ``methods``, etc  
+``mounted`` is a lifestyle hook, that is fired when the component is "mounted" on the DOM. under goes code you want to run at this moment
+
+### state management pattern
+as application grows, you may want to implement a state management solution. Vuex is one, that is a library

@@ -29,3 +29,10 @@ button{
 .outDecoration{
   text-decoration: line-through;
 }
+.tab {
+  margin: 0 2%;
+}
+.activeTab {
+  color: green;
+  text-decoration: underline;
+}
