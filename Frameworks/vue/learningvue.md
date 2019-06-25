@@ -93,9 +93,10 @@ you can also be bound to a 'styleObject' inside *data* that
 is a set of CSS properties instead of a single one
 AND also an array of styleObjects if needed!
 
-### Class binding 
+### Class binding
 Can dynamically add a class based on whether values on the right are true
-```:class="{ active: activeClass, 'text-danger': errorClass }"
+```
+:class="{ active: activeClass, 'text-danger': errorClass }"
   [inside Javascript file]
   data: {
     activeClass: true,
@@ -103,9 +104,11 @@ Can dynamically add a class based on whether values on the right are true
   }
 ```
 And like style, can bind an object to class as ``classObject`` with multiple class options  
-Can also add an array of classes too, which will pass text value
-Html - ``<div :class="[activeClass, errorClass]">..</div>``
-JS - ``` data: {
+Can also add an array of classes too, which will pass text value  
+Html - ``<div :class="[activeClass, errorClass]">..</div>``  
+JS -
+```
+data: {
   activeClass:'active',
   errorClass: 'text-danger'
 }
