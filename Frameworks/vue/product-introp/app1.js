@@ -20,7 +20,6 @@ Vue.component('product', {
       <p :class="{ outDecoration: !inStock }"
           v-else>Out of Stock</p>
       <p> Shipping: {{ shipping }}</p>
-      <product-details :details="detailsForProduct"></product-details>
       <!-- add :key so vue keeps up with identifier for each item
              -->
       <div v-for="(variant, index) in variants"
@@ -99,7 +98,6 @@ Vue.component('product', {
       return 2.99;
     }
   },
-  
   mounted() {
     eventBus.$on('review-submitted', productReview =>{
       this.reviews.push(productReview)

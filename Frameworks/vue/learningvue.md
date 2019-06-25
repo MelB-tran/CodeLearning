@@ -42,9 +42,9 @@ const app = new Vue({
 * each component is a new vue instance and share most of basic stuff except for some "root' properties
 * An instance's $data with properties - only updates properties present at initialization
 * you can access an instance's properties with dollar sign ($) API reference
-* like asp, it lets you add methods at diff stages of 'lifecycle', called "Lifecycle Hooks"
-only for created, mounted, updated, destroyed - Lifecycle Diagram
-Template Syntax
+
+
+### Template Syntax
 * to pass data inside a component, use props (in this example, an array)
 ```
 Vue.component('product', {
@@ -82,18 +82,18 @@ or also as ``@mouseover`` for DOM element, setting method which can also take pa
 when writing to js and Vue instance, you can write methods as
 * anonymous functions - supported by most browsers ``addToCart: function(){..}``
 * esx shorthand - not supported all browsers `` updateProduct(parameter){...} ``
-other events Include
-* ``@click="..."``
-* on a form ``@submit="..."`` - using ``@submit.prevennt`` also prevents default behavior on submit (refresh page)!
-* on an input ``@keyup.enter="..."``
+* other events Include ``@click="..."``  
+on a form ``@submit="..."`` - using ``@submit.prevennt`` also prevents default behavior on submit (refresh page)!  
+on an input ``@keyup.enter="..."``  
 Documentation: [Event handling](https://vuejs.org/v2/guide/events.html)
-**Style banding**  
+
+### Style banding
 ``:style="{backgroundColor: variant.variantColor}"`` used to dynamically bind styles based on data.  
 you can also be bound to a 'styleObject' inside *data* that
 is a set of CSS properties instead of a single one
 AND also an array of styleObjects if needed!
 
-**Class binding**  
+### Class binding 
 Can dynamically add a class based on whether values on the right are true
 ```:class="{ active: activeClass, 'text-danger': errorClass }"
   [inside Javascript file]
@@ -146,6 +146,7 @@ a new vue instance, can use an "event bus" to pass information across descendent
 ### lifecycle Hooks
 an example, goes like an element to component like ``data``, ``methods``, etc  
 ``mounted`` is a lifestyle hook, that is fired when the component is "mounted" on the DOM. under goes code you want to run at this moment
+Lifecycle options - created, mounted, updated, destroyed
 
 ### state management pattern
 as application grows, you may want to implement a state management solution. Vuex is one, that is a library
